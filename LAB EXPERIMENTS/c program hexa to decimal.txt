@@ -1,0 +1,29 @@
+#include <stdio.h>
+
+int main() {
+    char hex[20];
+    int i, digit;
+    int decimal = 0;
+
+    printf("Enter a hexadecimal number: ");
+    scanf("%s", hex);
+
+    for (i = 0; hex[i] != '\0'; i++) {
+        if (hex[i] >= '0' && hex[i] <= '9')
+            digit = hex[i] - '0';
+        else if (hex[i] >= 'A' && hex[i] <= 'F')
+            digit = hex[i] - 'A' + 10;
+        else if (hex[i] >= 'a' && hex[i] <= 'f')
+            digit = hex[i] - 'a' + 10;
+        else {
+            printf("Invalid hexadecimal number!\n");
+            return 1;
+        }
+
+        decimal = decimal * 16 + digit;
+    }
+
+    printf("Decimal number = %d\n", decimal);
+
+    return 0;
+}

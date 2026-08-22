@@ -1,0 +1,43 @@
+#include <stdio.h>
+
+int main() {
+    char hex[20];
+    int i, digit;
+    long decimal = 0;
+    long octal = 0;
+    int place = 1;
+
+    printf("Enter a hexadecimal number: ");
+    scanf("%s", hex);
+
+    // Hexadecimal to Decimal
+    for (i = 0; hex[i] != '\0'; i++) {
+        if (hex[i] >= '0' && hex[i] <= '9')
+            digit = hex[i] - '0';
+        else if (hex[i] >= 'A' && hex[i] <= 'F')
+            digit = hex[i] - 'A' + 10;
+        else if (hex[i] >= 'a' && hex[i] <= 'f')
+            digit = hex[i] - 'a' + 10;
+        else {
+            printf("Invalid hexadecimal number!\n");
+            return 1;
+        }
+
+        decimal = decimal * 16 + digit;
+    }
+
+    // Decimal to Octal
+    if (decimal == 0) {
+        octal = 0;
+    } else {
+        while (decimal > 0) {
+            octal = octal + (decimal % 8) * place;
+            decimal = decimal / 8;
+            place = place * 10;
+        }
+    }
+
+    printf("Octal number = %ld\n", octal);
+
+    return 0;
+}
